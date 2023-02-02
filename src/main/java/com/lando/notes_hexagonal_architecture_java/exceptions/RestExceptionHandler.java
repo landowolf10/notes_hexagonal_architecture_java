@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,11 +56,21 @@ public class RestExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EntityNotFoundException.class)
     ErrorDetailDTO handleEntityNotFoundException() {
-        ErrorDetailDTO errorDetail = new ErrorDetailDTO(); // llenar los detalles del error
+        return fillErrorData("Resource doesn't exists", "The resource you're trying to access doesn't exists.");
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    ErrorDetailDTO handleConstraintViolationException() {
+        return fillErrorData("User already exists", "The email you're trying to register already exists");
+    }
+
+    private ErrorDetailDTO fillErrorData(String title, String detail)
+    {
+        ErrorDetailDTO errorDetail = new ErrorDetailDTO();
         errorDetail.setTimeStamp(new Date().getTime());
         errorDetail.setStatus(HttpStatus.NOT_FOUND.value());
-        errorDetail.setTitle("Resource doesn't exists");
-        errorDetail.setDetail("The resource you're trying to access doesn't exists.");
+        errorDetail.setTitle(title);
+        errorDetail.setDetail(detail);
 
         return errorDetail;
     }

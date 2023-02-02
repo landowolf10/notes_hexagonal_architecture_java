@@ -29,11 +29,8 @@ public class UserJpaAdapter implements UserPersistencePort
 
         User user = userRepository.findUserByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword());
 
-        System.out.println("Email: " + loginDTO.getEmail());
-        System.out.println("Password: " + loginDTO.getPassword());
-
         if(user == null)
-            throw new EntityNotFoundException("Entity not found");
+            throw new EntityNotFoundException("User not registered");
 
         return user;
     }
