@@ -51,12 +51,6 @@ public class NoteJpaAdapter implements NotePersistencePort
 
         Notes note = new ModelMapper().map(notesDTO, Notes.class);
 
-        System.out.println("User ID: " + note.getUserID());
-        System.out.println("Note ID: " + note.getId());
-        System.out.println("Owner: " + note.getOwner());
-        System.out.println("Title: " + note.getTitle());
-        System.out.println("Content: " + note.getContent());
-
         return noteRepository.save(note);
     }
 
@@ -65,12 +59,6 @@ public class NoteJpaAdapter implements NotePersistencePort
         Notes note = getNoteById(id);
 
         new ModelMapper().map(notesDTO, note);
-
-        System.out.println("User ID: " + note.getUserID());
-        System.out.println("Note ID: " + id);
-        System.out.println("Owner: " + note.getOwner());
-        System.out.println("Title: " + note.getTitle());
-        System.out.println("Content: " + note.getContent());
 
         noteRepository.save(note);
 
