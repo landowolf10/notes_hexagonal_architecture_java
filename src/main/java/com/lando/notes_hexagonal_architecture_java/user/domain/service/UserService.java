@@ -5,10 +5,8 @@ import com.lando.notes_hexagonal_architecture_java.user.domain.dto.LoginDTO;
 import com.lando.notes_hexagonal_architecture_java.user.domain.dto.UserDTO;
 import com.lando.notes_hexagonal_architecture_java.user.domain.ports.api.UserServicePort;
 import com.lando.notes_hexagonal_architecture_java.user.domain.ports.spi.UserPersistencePort;
-import com.lando.notes_hexagonal_architecture_java.user.infrastructure.entity.User;
-
+import com.lando.notes_hexagonal_architecture_java.user.infrastructure.entity.Users;
 import java.util.List;
-import java.util.Optional;
 
 public class UserService implements UserServicePort
 {
@@ -19,12 +17,12 @@ public class UserService implements UserServicePort
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<Users> getUsers() {
         return userPersistencePort.getUsers();
     }
 
     @Override
-    public User login(LoginDTO loginDTO) {
+    public Users login(LoginDTO loginDTO) {
         return userPersistencePort.login(loginDTO);
     }
 

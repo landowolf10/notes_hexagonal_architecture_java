@@ -20,14 +20,12 @@ public class NoteJpaAdapter implements NotePersistencePort
 
     @Override
     public List<Notes> getNotes() {
-
         return noteRepository.findAll();
     }
 
     @Override
     public Notes getNoteById(Integer id) {
-
-        Notes note = noteRepository.findNoteById(id);
+        Notes note = noteRepository.findNoteByNoteId(id);
 
         if(note == null)
             throw new EntityNotFoundException("Entity not found");
@@ -38,7 +36,7 @@ public class NoteJpaAdapter implements NotePersistencePort
     @Override
     public List<Notes> getNotesByUserID(Integer userID) {
 
-        List<Notes> notes = noteRepository.findNotesByUserID(userID);
+        List<Notes> notes = noteRepository.findNotesByUserId(userID);
 
         if(notes == null)
             throw new EntityNotFoundException("Entity not found");

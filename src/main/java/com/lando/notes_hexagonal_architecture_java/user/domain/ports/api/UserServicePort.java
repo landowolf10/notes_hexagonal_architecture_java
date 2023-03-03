@@ -3,16 +3,15 @@ package com.lando.notes_hexagonal_architecture_java.user.domain.ports.api;
 import com.lando.notes_hexagonal_architecture_java.security.auth.AuthenticationResponse;
 import com.lando.notes_hexagonal_architecture_java.user.domain.dto.LoginDTO;
 import com.lando.notes_hexagonal_architecture_java.user.domain.dto.UserDTO;
-import com.lando.notes_hexagonal_architecture_java.user.infrastructure.entity.User;
+import com.lando.notes_hexagonal_architecture_java.user.infrastructure.entity.Users;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserServicePort
 {
-    List<User> getUsers();
+    List<Users> getUsers();
 
-    User login(LoginDTO loginDTO);
+    Users login(LoginDTO loginDTO);
 
     AuthenticationResponse addUser(UserDTO notesDTO);
 }

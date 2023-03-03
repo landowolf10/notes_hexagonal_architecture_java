@@ -20,20 +20,17 @@ import java.util.Locale;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
-
     @Autowired
     private MessageSource messageSource;
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ErrorDetailDTO handleMethodArgumentNotValidException(MethodArgumentNotValidException argumentNotValidException) {
-        //Llenar los detalles del error
         ErrorDetailDTO errorDetail = new ErrorDetailDTO();
         errorDetail.setTimeStamp(new Date().getTime());
         errorDetail.setStatus(HttpStatus.BAD_REQUEST.value());
         errorDetail.setTitle("Validation error");
         errorDetail.setDetail("El formulario tiene algunos errores de validación");
 
-        // crear y agregar los errores de validación
         List<FieldError> fieldErrors = argumentNotValidException.getBindingResult().getFieldErrors();
 
         for (FieldError fe : fieldErrors) {

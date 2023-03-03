@@ -6,18 +6,15 @@ import com.lando.notes_hexagonal_architecture_java.security.config.Role;
 import com.lando.notes_hexagonal_architecture_java.user.domain.dto.LoginDTO;
 import com.lando.notes_hexagonal_architecture_java.user.domain.dto.UserDTO;
 import com.lando.notes_hexagonal_architecture_java.user.domain.ports.spi.UserPersistencePort;
-import com.lando.notes_hexagonal_architecture_java.user.infrastructure.entity.User;
+import com.lando.notes_hexagonal_architecture_java.user.infrastructure.entity.Users;
 import com.lando.notes_hexagonal_architecture_java.user.infrastructure.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,17 +27,17 @@ public class UserJpaAdapter implements UserPersistencePort
     private UserRepository userRepository;
 
     @Override
-    public List<User> getUsers() {
+    public List<Users> getUsers() {
 
         return userRepository.findAll();
     }
 
     @Override
-    public User login(LoginDTO loginDTO) {
+    public Users login(LoginDTO loginDTO) {
         String encryptedPassword = Objects.requireNonNull(userRepository.findUserByEmail(loginDTO.getEmail())
                 .orElse(null)).getPassword();
 
-        User user = null;
+        Users user = null;
 
         if (passwordEncoder.matches(loginDTO.getPassword(), encryptedPassword))
             user = userRepository.findUserByEmailAndPassword(loginDTO.getEmail(), encryptedPassword);
@@ -53,7 +50,7 @@ public class UserJpaAdapter implements UserPersistencePort
 
     @Override
     public AuthenticationResponse addUser(UserDTO userDTO) {
-        var user = User.builder()
+        var user = Users.builder()
                 .name(userDTO.getName())
                 .email(userDTO.getEmail())
                 .password(passwordEncoder.encode(userDTO.getPassword()))

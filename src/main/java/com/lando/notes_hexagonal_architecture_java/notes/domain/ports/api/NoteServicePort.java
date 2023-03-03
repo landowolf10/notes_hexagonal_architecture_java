@@ -11,6 +11,7 @@ public interface NoteServicePort
     List<Notes> getNotes();
 
     Notes getNoteById(Integer id);
+
     List<Notes> getNotesByUserID(Integer userID);
 
     Notes addNote(NotesDTO notesDTO);

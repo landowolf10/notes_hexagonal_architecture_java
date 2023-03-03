@@ -1,53 +1,23 @@
 package com.lando.notes_hexagonal_architecture_java.notes.infrastructure.entity;
 
+import com.lando.notes_hexagonal_architecture_java.user.infrastructure.entity.Users;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Notes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "user_id")
-    private Integer userID;
+    @Column(name = "noteid")
+    private Integer noteId;
+    @Column(name = "userid")
+    private Integer userId;
     private String owner;
     private String title;
     private String content;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public Integer getUserID() {
-        return userID;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setUserID(Integer userID) {
-        this.userID = userID;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }

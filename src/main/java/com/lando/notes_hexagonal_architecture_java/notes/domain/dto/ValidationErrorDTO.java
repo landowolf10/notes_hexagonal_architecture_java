@@ -6,12 +6,4 @@ import lombok.Data;
 public class ValidationErrorDTO {
     private String code;
     private String message;
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

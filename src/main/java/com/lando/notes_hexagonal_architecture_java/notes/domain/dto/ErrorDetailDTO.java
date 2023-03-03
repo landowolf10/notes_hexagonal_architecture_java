@@ -13,42 +13,6 @@ public class ErrorDetailDTO {
     private String title;
     private String detail;
 
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public void setErrors(Map<String, List<ValidationErrorDTO>> errors) {
-        this.errors = errors;
-    }
-
-    public long getTimeStamp() {
-        return timeStamp;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
     public Map<String, List<ValidationErrorDTO>> getErrors() {
         return errors;
     }
