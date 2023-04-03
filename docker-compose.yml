@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   springboot-app:
-    image: spring-boot-docker:spring-docker
+    image: landowolf/spring-boot-docker:latest
     restart: always
     build: .
     ports:
