@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/note")
@@ -18,8 +20,9 @@ public class NoteController
     NoteServicePort noteServicePort;
 
     @GetMapping("/list")
-    List<Notes> getAllNotes() {
-        return noteServicePort.getNotes();
+    Map<String, List<Notes>> getAllNotes() {
+        List<Notes> notes = noteServicePort.getNotes();
+        return Collections.singletonMap("notes", notes);
     }
 
     @GetMapping("/{id}")

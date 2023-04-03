@@ -1,33 +1,26 @@
 version: "3.8"
 
-networks:
-  hexagonal-architecture-notes-app:
-    external: true
-
 services:
+  springboot-app:
+    image: landowolf/spring-boot-docker:latest
+    restart: always
+    build: .
+    ports:
+      - 9090:9090
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+
   mysqldb:
+    container_name: mysqldb
     image: mysql:8.0.32
+    ports:
+      - 3307:3306
     volumes:
       - ./hexagonal-architecture-notes-app-mysql-data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_ROOT_USER=root
+      MYSQL_DATABASE: notes
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secret
     restart: on-failure
-    networks:
-      - hexagonal-architecture-notes-app
-
-  app:
-    image: spring-boot-docker:spring-docker
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 9090:9090
-    depends_on:
-      - mysqldb
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/notes?serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: secret
-    networks:
-      - hexagonal-architecture-notes-app

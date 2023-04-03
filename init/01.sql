@@ -15,3 +15,6 @@ CREATE TABLE IF NOT EXISTS notes(
     PRIMARY KEY (noteid), 
     FOREIGN KEY (userid) REFERENCES users (userid)
 );
+
+SELECT * FROM notes;
+SELECT * FROM users;
